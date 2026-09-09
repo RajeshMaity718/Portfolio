@@ -1,0 +1,1836 @@
+
+/* =========================================================
+   PORTFOLIO STUDIO
+   Modern Dark UI
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: #08080b;
+    color: #f5f5f7;
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+input,
+textarea {
+    outline: none;
+}
+
+
+/* =========================================================
+   BACKGROUND EFFECT
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    top: -300px;
+    right: -200px;
+
+    background: radial-gradient(
+        circle,
+        rgba(124, 58, 237, 0.14),
+        transparent 65%
+    );
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    padding: 28px 18px;
+
+    background: rgba(11, 11, 15, 0.95);
+
+    border-right: 1px solid #24242a;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+
+    backdrop-filter: blur(20px);
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 10px 32px;
+}
+
+.logo-box {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    display: grid;
+    place-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #a78bfa
+    );
+
+    color: #09090b;
+
+    font-family: "Space Grotesk";
+    font-weight: 700;
+
+    box-shadow: 0 0 25px rgba(167, 139, 250, 0.2);
+}
+
+.logo h2 {
+    font-family: "Space Grotesk";
+    font-size: 17px;
+    line-height: 1;
+}
+
+.logo span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: #71717a;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.nav {
+    width: 100%;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #a1a1aa;
+
+    text-align: left;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    transition: all 0.2s ease;
+}
+
+.nav:hover {
+    background: #17171c;
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.nav.active {
+    background: linear-gradient(
+        90deg,
+        #1d1825,
+        #16141a
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        inset 3px 0 0 #a78bfa;
+}
+
+.nav:first-letter {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+
+/* =========================================================
+   AI CARD
+   ========================================================= */
+
+.ai-card {
+    padding: 15px;
+
+    border-radius: 14px;
+
+    border: 1px solid #332a3d;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(139, 92, 246, 0.15),
+            transparent 60%
+        ),
+        #121116;
+
+    margin-bottom: 20px;
+}
+
+.ai-card h4 {
+    font-size: 11px;
+
+    color: #c4b5fd;
+
+    margin-bottom: 6px;
+}
+
+.ai-card p {
+    color: #71717a;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   USER
+   ========================================================= */
+
+.user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 17px 6px 0;
+
+    border-top: 1px solid #24242a;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #312e81,
+        #7c3aed
+    );
+
+    font-weight: 700;
+
+    font-size: 12px;
+}
+
+.user b {
+    display: block;
+
+    font-size: 11px;
+}
+
+.user small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #71717a;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main {
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    padding: 34px 42px 80px;
+
+    max-width: 1700px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 32px;
+}
+
+.small-title {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #71717a;
+
+    margin-bottom: 7px;
+}
+
+.header h1 {
+    font-family: "Space Grotesk";
+
+    font-size: 29px;
+
+    font-weight: 600;
+
+    letter-spacing: -1px;
+}
+
+.header h1 span {
+    color: #a78bfa;
+}
+
+
+/* =========================================================
+   HEADER BUTTONS
+   ========================================================= */
+
+.header-buttons {
+    display: flex;
+
+    gap: 10px;
+}
+
+.preview-btn,
+.save-btn {
+    border-radius: 10px;
+
+    padding: 10px 16px;
+
+    font-size: 11px;
+
+    transition: all 0.2s ease;
+}
+
+.preview-btn {
+    background: #141419;
+
+    border: 1px solid #303038;
+
+    color: #d4d4d8;
+}
+
+.preview-btn:hover {
+    background: #1d1d23;
+
+    border-color: #4a4a55;
+}
+
+.save-btn {
+    background: #ffffff;
+
+    border: 1px solid #ffffff;
+
+    color: #09090b;
+
+    font-weight: 700;
+
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.08);
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 285px;
+
+    padding: 38px 42px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid #2b2532;
+
+    background:
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(124, 58, 237, 0.23),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 60% 0%,
+            rgba(167, 139, 250, 0.08),
+            transparent 40%
+        ),
+        linear-gradient(
+            120deg,
+            #141116,
+            #0d0d10
+        );
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.03);
+}
+
+
+/* decorative grid */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black,
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.badge {
+    display: inline-block;
+
+    padding: 7px 11px;
+
+    border-radius: 100px;
+
+    border: 1px solid #42384d;
+
+    background: rgba(124, 58, 237, 0.08);
+
+    color: #c4b5fd;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    box-shadow:
+        0 0 20px rgba(124, 58, 237, 0.08);
+}
+
+.hero h2 {
+    margin-top: 18px;
+
+    font-family: "Space Grotesk";
+
+    font-size: 41px;
+
+    line-height: 1.03;
+
+    letter-spacing: -1.5px;
+}
+
+.hero h2 span {
+    color: #a78bfa;
+
+    font-style: italic;
+}
+
+.hero p {
+    max-width: 530px;
+
+    margin-top: 13px;
+
+    color: #a1a1aa;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   START BUTTON
+   ========================================================= */
+
+.start-btn {
+    margin-top: 18px;
+
+    padding: 11px 17px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #09090b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    transition: all 0.25s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(255,255,255,0.12);
+}
+
+
+/* =========================================================
+   HERO CIRCLE
+   ========================================================= */
+
+.hero-circle {
+    width: 215px;
+    height: 215px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #403449;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(91, 33, 182, 0.25),
+            rgba(20, 17, 24, 0.9) 65%
+        );
+
+    box-shadow:
+        0 0 70px rgba(124, 58, 237, 0.15),
+        inset 0 0 50px rgba(124, 58, 237, 0.08);
+
+    animation: floatCircle 5s ease-in-out infinite;
+}
+
+@keyframes floatCircle {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.hero-circle strong {
+    display: block;
+
+    text-align: center;
+
+    color: #c4b5fd;
+
+    font-size: 27px;
+
+    margin-bottom: 4px;
+}
+
+.hero-circle h3 {
+    text-align: center;
+
+    font-family: "Space Grotesk";
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
+}
+
+.hero-circle small {
+    display: block;
+
+    margin-top: 5px;
+
+    text-align: center;
+
+    color: #71717a;
+
+    font-size: 7px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin: 40px 0 17px;
+}
+
+.workspace h2,
+.my-portfolios h2 {
+    font-family: "Space Grotesk";
+
+    font-size: 23px;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   PORTFOLIO NAME
+   ========================================================= */
+
+.portfolio-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.portfolio-name label {
+    color: #71717a;
+
+    font-size: 9px;
+}
+
+.portfolio-name input {
+    width: 230px;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    border: 1px solid #29292f;
+
+    background: #111115;
+
+    color: #e4e4e7;
+
+    font-size: 10px;
+
+    transition: border 0.2s;
+}
+
+.portfolio-name input:focus {
+    border-color: #6d4b8a;
+
+    box-shadow:
+        0 0 0 3px rgba(124, 58, 237, 0.07);
+}
+
+
+/* =========================================================
+   BUILDER GRID
+   ========================================================= */
+
+.builder {
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 1fr)
+        minmax(280px, 1.15fr)
+        minmax(320px, 1.45fr);
+
+    gap: 13px;
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+    min-height: 510px;
+
+    border-radius: 16px;
+
+    border: 1px solid #27272d;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111115,
+            #0e0e12
+        );
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.15);
+}
+
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.panel-header {
+    padding: 17px;
+
+    border-bottom: 1px solid #25252b;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.panel-header h3 {
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.panel-header p {
+    margin-top: 4px;
+
+    color: #71717a;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PLUS BUTTON
+   ========================================================= */
+
+.plus-btn {
+    width: 29px;
+    height: 29px;
+
+    border-radius: 8px;
+
+    border: 1px solid #303038;
+
+    background: #17171c;
+
+    color: #d4d4d8;
+
+    transition: all 0.2s;
+}
+
+.plus-btn:hover {
+    background: #26202f;
+
+    color: #c4b5fd;
+
+    border-color: #4c3c60;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+#sections {
+    padding: 9px;
+}
+
+.section {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 10px;
+
+    border: 1px solid transparent;
+
+    border-radius: 11px;
+
+    margin-bottom: 5px;
+
+    cursor: grab;
+
+    transition:
+        background 0.2s,
+        border 0.2s,
+        transform 0.2s;
+}
+
+.section:hover {
+    background: #17171c;
+
+    transform: translateX(2px);
+}
+
+.section:active {
+    cursor: grabbing;
+}
+
+.section.selected {
+    background:
+        linear-gradient(
+            90deg,
+            #1b1623,
+            #151318
+        );
+
+    border-color: #4a3b58;
+
+    box-shadow:
+        inset 2px 0 #a78bfa;
+}
+
+
+/* =========================================================
+   DRAG ICON
+   ========================================================= */
+
+.drag {
+    color: #52525b;
+
+    font-size: 14px;
+
+    cursor: grab;
+}
+
+
+/* =========================================================
+   SECTION ICON
+   ========================================================= */
+
+.section-icon {
+    width: 29px;
+    height: 29px;
+
+    border-radius: 8px;
+
+    background: #1b1920;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #c4b5fd;
+
+    font-size: 12px;
+
+    border: 1px solid #29242f;
+}
+
+
+/* =========================================================
+   SECTION TEXT
+   ========================================================= */
+
+.section > div:last-child {
+    flex: 1;
+}
+
+.section b {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.section small {
+    display: block;
+
+    color: #71717a;
+
+    font-size: 8px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   ADD SECTION
+   ========================================================= */
+
+.add-section {
+    width: calc(100% - 26px);
+
+    margin: 4px 13px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    border: 1px dashed #36333b;
+
+    background: transparent;
+
+    color: #a1a1aa;
+
+    font-size: 9px;
+
+    transition: all 0.2s;
+}
+
+.add-section:hover {
+    border-color: #72538d;
+
+    color: #c4b5fd;
+
+    background: #17131c;
+}
+
+
+/* =========================================================
+   AI BUTTON
+   ========================================================= */
+
+.ai-btn {
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid #40304f;
+
+    background: #17121d;
+
+    color: #c4b5fd;
+
+    font-size: 9px;
+
+    transition: all 0.2s;
+}
+
+.ai-btn:hover {
+    background: #21192b;
+
+    border-color: #6d4b8a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form {
+    padding: 20px;
+}
+
+.form label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #a1a1aa;
+
+    font-size: 9px;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+
+    padding: 10px 11px;
+
+    margin-bottom: 16px;
+
+    border-radius: 9px;
+
+    border: 1px solid #2a2a31;
+
+    background: #141419;
+
+    color: #e4e4e7;
+
+    font-size: 10px;
+
+    transition: all 0.2s;
+}
+
+.form textarea {
+    min-height: 95px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+.form input:focus,
+.form textarea:focus {
+    border-color: #74528d;
+
+    box-shadow:
+        0 0 0 3px rgba(124,58,237,0.06);
+}
+
+
+/* =========================================================
+   FORM ROW
+   ========================================================= */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   AI TIP
+   ========================================================= */
+
+.ai-tip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    margin-top: 2px;
+
+    border-radius: 11px;
+
+    border: 1px solid #342a3d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #18131f,
+            #121116
+        );
+}
+
+.ai-tip > span {
+    color: #c4b5fd;
+
+    font-size: 17px;
+}
+
+.ai-tip div {
+    flex: 1;
+}
+
+.ai-tip b {
+    display: block;
+
+    font-size: 10px;
+}
+
+.ai-tip small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #77717e;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+.ai-tip button {
+    border: 0;
+
+    background: transparent;
+
+    color: #c4b5fd;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PREVIEW HEADER
+   ========================================================= */
+
+.preview-panel {
+    background: #0b0b0e;
+}
+
+.preview-header {
+    height: 49px;
+
+    padding: 0 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #25252b;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    color: #71717a;
+}
+
+.live {
+    color: #86efac;
+
+    letter-spacing: 0;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   PORTFOLIO PREVIEW
+   ========================================================= */
+
+.portfolio-preview {
+    margin: 13px;
+
+    min-height: 430px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background: #f4f4f5;
+
+    color: #18181b;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   PREVIEW NAV
+   ========================================================= */
+
+.preview-nav {
+    height: 58px;
+
+    padding: 0 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.preview-nav strong {
+    font-family: "Space Grotesk";
+
+    font-size: 14px;
+}
+
+.preview-nav span {
+    color: #52525b;
+
+    font-size: 7px;
+}
+
+.preview-nav button {
+    border: 0;
+
+    border-radius: 100px;
+
+    padding: 7px 10px;
+
+    background: #18181b;
+
+    color: #ffffff;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   PREVIEW HERO
+   ========================================================= */
+
+.preview-hero {
+    padding: 42px 25px 28px;
+}
+
+.preview-hero small {
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color: #52525b;
+}
+
+.preview-hero h2 {
+    margin: 12px 0;
+
+    font-family: "Space Grotesk";
+
+    font-size: 39px;
+
+    line-height: 0.98;
+
+    letter-spacing: -2px;
+}
+
+.preview-hero h2 i {
+    color: #7c3aed;
+
+    font-style: normal;
+}
+
+.preview-hero p {
+    max-width: 200px;
+
+    color: #71717a;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+.preview-hero button {
+    margin-top: 10px;
+
+    padding: 9px 12px;
+
+    border: 0;
+
+    border-radius: 100px;
+
+    background: #18181b;
+
+    color: #ffffff;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.stats {
+    display: flex;
+
+    gap: 35px;
+
+    padding: 15px 25px;
+
+    border-top: 1px solid #dedee2;
+}
+
+.stats b {
+    display: block;
+
+    font-family: "Space Grotesk";
+
+    font-size: 16px;
+}
+
+.stats small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #71717a;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   MY PORTFOLIOS
+   ========================================================= */
+
+.my-portfolios {
+    margin-top: 52px;
+}
+
+.my-portfolios .small-title {
+    margin-bottom: 5px;
+}
+
+.portfolio-cards {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 18px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   PORTFOLIO CARD
+   ========================================================= */
+
+.portfolio-card {
+    width: 285px;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    border: 1px solid #29292f;
+
+    background: #101014;
+
+    transition:
+        transform 0.25s,
+        border 0.25s,
+        box-shadow 0.25s;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #40304f;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   PORTFOLIO COVER
+   ========================================================= */
+
+.portfolio-cover {
+    height: 150px;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(124,58,237,0.2),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #1a1520,
+            #0c0c0f
+        );
+}
+
+.portfolio-cover span {
+    font-family: "Space Grotesk";
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.portfolio-cover strong {
+    font-family: "Space Grotesk";
+
+    font-size: 24px;
+
+    line-height: 0.95;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   CARD INFO
+   ========================================================= */
+
+.card-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 13px;
+}
+
+.card-info b {
+    display: block;
+
+    font-size: 11px;
+}
+
+.card-info small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #71717a;
+
+    font-size: 8px;
+}
+
+.card-info button {
+    width: 25px;
+    height: 25px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #71717a;
+
+    border-radius: 6px;
+}
+
+.card-info button:hover {
+    background: #1d1d22;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+   ========================================================= */
+
+.card-actions {
+    display: flex;
+
+    gap: 5px;
+
+    padding: 0 12px 12px;
+}
+
+.card-actions button {
+    flex: 1;
+
+    padding: 7px 5px;
+
+    border-radius: 7px;
+
+    border: 1px solid #29292f;
+
+    background: #141419;
+
+    color: #a1a1aa;
+
+    font-size: 8px;
+
+    transition: all 0.2s;
+}
+
+.card-actions button:hover {
+    color: #ffffff;
+
+    border-color: #45454d;
+
+    background: #1d1d22;
+}
+
+
+/* =========================================================
+   NEW PORTFOLIO
+   ========================================================= */
+
+.new-portfolio {
+    width: 285px;
+    height: 226px;
+
+    border-radius: 14px;
+
+    border: 1px dashed #36333b;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(15,15,19,0.5);
+
+    transition: all 0.25s;
+}
+
+.new-portfolio:hover {
+    border-color: #72538d;
+
+    background: #121016;
+
+    transform: translateY(-4px);
+}
+
+.new-portfolio > span {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #19151f;
+
+    color: #c4b5fd;
+
+    font-size: 22px;
+
+    border: 1px solid #342a3d;
+}
+
+.new-portfolio b {
+    margin-top: 12px;
+
+    font-size: 11px;
+}
+
+.new-portfolio small {
+    margin-top: 5px;
+
+    color: #52525b;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #29292f;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+    background: #7c3aed;
+
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1250px) {
+
+    .main {
+        padding: 30px;
+    }
+
+    .builder {
+        grid-template-columns:
+            minmax(220px, 1fr)
+            minmax(280px, 1fr);
+    }
+
+    .preview-panel {
+        grid-column: 1 / -1;
+    }
+
+    .portfolio-preview {
+        min-height: 400px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        margin-left: 210px;
+
+        width: calc(100% - 210px);
+
+        padding: 25px;
+    }
+
+    .hero {
+        padding: 30px;
+    }
+
+    .hero-circle {
+        width: 175px;
+        height: 175px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 20px 16px 60px;
+    }
+
+    .header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .header-buttons {
+        width: 100%;
+    }
+
+    .header-buttons button {
+        flex: 1;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .hero {
+        min-height: auto;
+
+        padding: 28px 24px;
+    }
+
+    .hero-circle {
+        display: none;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .workspace {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .portfolio-name {
+        width: 100%;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .portfolio-name input {
+        width: 100%;
+    }
+
+    .builder {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-panel {
+        grid-column: auto;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-cards {
+        flex-direction: column;
+    }
+
+    .portfolio-card,
+    .new-portfolio {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .main {
+        padding: 16px 12px 50px;
+    }
+
+    .hero {
+        border-radius: 16px;
+
+        padding: 24px 20px;
+    }
+
+    .hero h2 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 11px;
+    }
+
+    .panel {
+        border-radius: 13px;
+    }
+
+    .preview-nav span {
+        display: none;
+    }
+
+    .preview-hero h2 {
+        font-size: 34px;
+    }
+
+    .stats {
+        gap: 20px;
+    }
+
+}

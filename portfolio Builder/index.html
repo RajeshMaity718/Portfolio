@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio Studio</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-box">P</div>
+
+            <div>
+                <h2>Portfolio</h2>
+                <span>Studio</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav active">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav">
+                ➕ Create Portfolio
+            </button>
+
+            <button class="nav">
+                📁 My Portfolios
+            </button>
+
+            <button class="nav">
+                🎨 Templates
+            </button>
+
+            <button class="nav">
+                ✨ AI Assistant
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="ai-card">
+                <h4>✨ AI Powered</h4>
+                <p>
+                    Build your professional portfolio faster with AI.
+                </p>
+            </div>
+
+            <div class="user">
+                <div class="user-avatar">R</div>
+
+                <div>
+                    <b>Rajesh</b>
+                    <small>Developer</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <div>
+                <p class="small-title">PORTFOLIO BUILDER</p>
+
+                <h1>
+                    Build your
+                    <span>digital identity.</span>
+                </h1>
+            </div>
+
+            <div class="header-buttons">
+
+                <button class="preview-btn">
+                    Preview ↗
+                </button>
+
+                <button class="save-btn" onclick="savePortfolio()">
+                    Save Portfolio
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    ✨ AI-POWERED BUILDER
+                </div>
+
+                <h2>
+                    Your portfolio,
+                    <br>
+                    <span>your story.</span>
+                </h2>
+
+                <p>
+                    Create a professional portfolio with drag & drop
+                    sections, live preview and AI assistance.
+                </p>
+
+                <button class="start-btn" onclick="startBuilding()">
+                    Start Building →
+                </button>
+
+            </div>
+
+            <div class="hero-circle">
+
+                <div>
+                    <strong>✦</strong>
+                    <h3>CREATE</h3>
+                    <small>YOUR WAY</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Workspace -->
+
+        <section class="workspace">
+
+            <div>
+                <p class="small-title">WORKSPACE</p>
+                <h2>Portfolio Builder</h2>
+            </div>
+
+            <div class="portfolio-name">
+
+                <label>Portfolio name</label>
+
+                <input
+                    id="portfolioName"
+                    type="text"
+                    value="My Developer Portfolio"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- Builder -->
+
+        <section class="builder">
+
+
+            <!-- Sections -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Sections</h3>
+                        <p>Drag to reorder your story</p>
+                    </div>
+
+                    <button class="plus-btn">
+                        +
+                    </button>
+
+                </div>
+
+
+                <div id="sections">
+
+
+                    <div
+                        class="section selected"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">✦</span>
+
+                        <div>
+                            <b>Hero</b>
+                            <small>Introduction and headline</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">◎</span>
+
+                        <div>
+                            <b>About</b>
+                            <small>Your story and background</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">◇</span>
+
+                        <div>
+                            <b>Skills</b>
+                            <small>Technologies and strengths</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">▣</span>
+
+                        <div>
+                            <b>Projects</b>
+                            <small>Featured work</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">◷</span>
+
+                        <div>
+                            <b>Experience</b>
+                            <small>Work and internships</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">⌁</span>
+
+                        <div>
+                            <b>Education</b>
+                            <small>Academic background</small>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="section"
+                        draggable="true"
+                        onclick="selectSection(this)"
+                    >
+
+                        <span class="drag">☷</span>
+
+                        <span class="section-icon">↗</span>
+
+                        <div>
+                            <b>Contact</b>
+                            <small>Ways to reach you</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button class="add-section">
+                    + Add Section
+                </button>
+
+            </div>
+
+
+            <!-- Editor -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3 id="editorTitle">
+                            Edit Hero
+                        </h3>
+
+                        <p>
+                            Make it uniquely yours
+                        </p>
+                    </div>
+
+                    <button class="ai-btn">
+                        ✨ Ask AI
+                    </button>
+
+                </div>
+
+
+                <div class="form">
+
+                    <label>
+                        Headline
+                    </label>
+
+                    <input
+                        id="headline"
+                        value="Hi, I'm Rajesh — a creative developer."
+                    >
+
+
+                    <label>
+                        Short description
+                    </label>
+
+                    <textarea id="description">I build modern, useful and beautiful digital experiences using web technologies.</textarea>
+
+
+                    <div class="form-row">
+
+                        <div>
+
+                            <label>
+                                Button text
+                            </label>
+
+                            <input
+                                value="View My Work"
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label>
+                                Button link
+                            </label>
+
+                            <input
+                                value="#projects"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ai-tip">
+
+                        <span>✨</span>
+
+                        <div>
+
+                            <b>
+                                Need help with your copy?
+                            </b>
+
+                            <small>
+                                Let AI turn your rough idea into professional content.
+                            </small>
+
+                        </div>
+
+                        <button>
+                            Try AI →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Preview -->
+
+            <div class="panel preview-panel">
+
+                <div class="preview-header">
+
+                    <span>
+                        LIVE PREVIEW
+                    </span>
+
+                    <span class="live">
+                        ● Live
+                    </span>
+
+                </div>
+
+
+                <div class="portfolio-preview">
+
+                    <div class="preview-nav">
+
+                        <strong>
+                            RM.
+                        </strong>
+
+                        <span>
+                            About &nbsp;
+                            Skills &nbsp;
+                            Projects &nbsp;
+                            Contact
+                        </span>
+
+                        <button>
+                            Let's Talk ↗
+                        </button>
+
+                    </div>
+
+
+                    <div class="preview-hero">
+
+                        <small>
+                            HELLO, I'M RAJESH
+                        </small>
+
+                        <h2>
+                            Creative
+                            <br>
+                            <i>Developer.</i>
+                        </h2>
+
+                        <p id="previewDescription">
+                            I build modern, useful and beautiful digital experiences.
+                        </p>
+
+                        <button>
+                            View My Work →
+                        </button>
+
+                    </div>
+
+
+                    <div class="stats">
+
+                        <div>
+                            <b>08+</b>
+                            <small>Projects</small>
+                        </div>
+
+                        <div>
+                            <b>12+</b>
+                            <small>Technologies</small>
+                        </div>
+
+                        <div>
+                            <b>01</b>
+                            <small>Developer</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- My portfolios -->
+
+        <section class="my-portfolios">
+
+            <p class="small-title">
+                YOUR WORK
+            </p>
+
+            <h2>
+                My Portfolios
+            </h2>
+
+
+            <div class="portfolio-cards">
+
+                <div class="portfolio-card">
+
+                    <div class="portfolio-cover">
+
+                        <span>RM.</span>
+
+                        <strong>
+                            Creative
+                            <br>
+                            Developer.
+                        </strong>
+
+                    </div>
+
+                    <div class="card-info">
+
+                        <div>
+
+                            <b id="savedName">
+                                My Developer Portfolio
+                            </b>
+
+                            <small>
+                                Saved just now
+                            </small>
+
+                        </div>
+
+                        <button>
+                            ⋮
+                        </button>
+
+                    </div>
+
+
+                    <div class="card-actions">
+
+                        <button>
+                            👁 View
+                        </button>
+
+                        <button>
+                            ✎ Edit
+                        </button>
+
+                        <button onclick="deletePortfolio()">
+                            🗑 Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="new-portfolio">
+
+                    <span>
+                        +
+                    </span>
+
+                    <b>
+                        Create another portfolio
+                    </b>
+
+                    <small>
+                        Try a different style or template
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
