@@ -1,0 +1,1381 @@
+/* ============================================================
+   PORTFOLIO STUDIO - STYLE.CSS
+   Canva-style Photo Upload + Drag & Drop
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.25);
+
+    --bg-main: #0b0f19;
+    --bg-panel: #0f172a;
+    --bg-panel-dark: #020617;
+
+    --border: #1e293b;
+    --border-light: #334155;
+
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+}
+
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family:
+        'Plus Jakarta Sans',
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        sans-serif;
+
+    background-color: var(--bg-main);
+    color: var(--text-main);
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+
+::selection {
+    background: rgba(99, 102, 241, 0.35);
+    color: white;
+}
+
+
+/* ============================================================
+   DEVICE VIEWPORT SIMULATION
+   ============================================================ */
+
+.preview-container {
+    transition:
+        width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        border-radius 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.viewport-desktop {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.viewport-tablet {
+    width: 768px;
+    height: 94%;
+    border-radius: 24px;
+    border: 10px solid #1e293b;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+.viewport-mobile {
+    width: 390px;
+    height: 844px;
+    max-height: 94%;
+    border-radius: 36px;
+    border: 12px solid #1e293b;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.7);
+
+    position: relative;
+}
+
+.viewport-mobile::before {
+    content: '';
+
+    position: absolute;
+
+    top: 6px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 90px;
+    height: 18px;
+
+    background-color: #0b0f19;
+
+    border-radius: 20px;
+
+    z-index: 50;
+
+    pointer-events: none;
+}
+
+#preview-frame {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    background: white;
+
+    display: block;
+}
+
+
+/* ============================================================
+   FORM INPUTS
+   ============================================================ */
+
+.form-input {
+    background-color: #0f172a;
+
+    border: 1px solid #334155;
+
+    color: #f8fafc;
+
+    border-radius: 8px;
+
+    padding: 0.5rem 0.75rem;
+
+    font-size: 0.875rem;
+
+    width: 100%;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.form-input:hover {
+    border-color: #475569;
+}
+
+.form-input:focus {
+    outline: none;
+
+    border-color: var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px var(--primary-glow);
+}
+
+.form-input::placeholder {
+    color: #64748b;
+}
+
+.form-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   FORM LABEL
+   ============================================================ */
+
+.form-label {
+    display: block;
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+    color: #94a3b8;
+
+    margin-bottom: 0.25rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   COLOR SWATCHES
+   ============================================================ */
+
+.color-swatch {
+    width: 24px;
+    height: 24px;
+
+    border-radius: 9999px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
+    border: 2px solid transparent;
+}
+
+.color-swatch:hover {
+    transform: scale(1.15);
+}
+
+.color-swatch.active {
+    border-color: white;
+
+    box-shadow:
+        0 0 0 2px var(--primary-color);
+
+    transform: scale(1.15);
+}
+
+
+/* ============================================================
+   TOASTS
+   ============================================================ */
+
+#toast-container {
+    position: fixed;
+
+    bottom: 24px;
+    right: 24px;
+
+    z-index: 9999;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+
+    min-width: 280px;
+
+    padding: 12px 16px;
+
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    border-radius: 10px;
+
+    border: 1px solid #334155;
+
+    box-shadow:
+        0 10px 25px -5px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 0.875rem;
+
+    transform: translateY(20px);
+
+    opacity: 0;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    border-left: 4px solid #10b981;
+}
+
+.toast-info {
+    border-left: 4px solid #6366f1;
+}
+
+.toast-warning {
+    border-left: 4px solid #f59e0b;
+}
+
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 900;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.modal-content {
+    transform: scale(0.95);
+
+    transition: transform 0.2s ease;
+}
+
+.modal-overlay.open .modal-content {
+    transform: scale(1);
+}
+
+
+/* ============================================================
+   CANVA-STYLE PHOTO UPLOAD PANEL
+   ============================================================ */
+
+.photo-upload-panel {
+    background: #0f172a;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   PHOTO UPLOAD ZONE
+   ============================================================ */
+
+.photo-upload-zone {
+    position: relative;
+
+    margin: 12px;
+
+    padding: 22px 14px;
+
+    border: 2px dashed #334155;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    background: #0b1220;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.photo-upload-zone:hover {
+    border-color: #6366f1;
+
+    background:
+        rgba(99, 102, 241, 0.06);
+}
+
+.photo-upload-zone.drag-over {
+    border-color: #6366f1;
+
+    background:
+        rgba(99, 102, 241, 0.14);
+
+    transform: scale(1.01);
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.08),
+        inset 0 0 30px rgba(99, 102, 241, 0.04);
+}
+
+.photo-upload-zone.drag-over::after {
+    content: "Drop your images here";
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(2, 6, 23, 0.72);
+
+    color: #c7d2fe;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   PHOTO UPLOAD ICON
+   ============================================================ */
+
+.photo-upload-icon {
+    width: 46px;
+    height: 46px;
+
+    margin: 0 auto 9px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(99, 102, 241, 0.12);
+
+    color: #818cf8;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.photo-upload-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+
+/* ============================================================
+   PHOTO UPLOAD TEXT
+   ============================================================ */
+
+.photo-upload-title {
+    color: #e2e8f0;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+.photo-upload-subtitle {
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-bottom: 12px;
+}
+
+
+/* ============================================================
+   PHOTO UPLOAD BUTTON
+   ============================================================ */
+
+.photo-upload-button {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 10px 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #6366f1
+        );
+
+    color: white;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.photo-upload-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.photo-upload-button:active {
+    transform: translateY(0);
+}
+
+.photo-upload-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY HEADER
+   ============================================================ */
+
+.photo-library-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px 14px;
+
+    border-bottom: 1px solid #1e293b;
+}
+
+.photo-library-title {
+    color: #f8fafc;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.photo-library-count {
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY TABS
+   ============================================================ */
+
+.photo-library-tabs {
+    display: flex;
+
+    gap: 20px;
+
+    padding: 0 14px;
+
+    border-bottom: 1px solid #1e293b;
+}
+
+.photo-library-tab {
+    position: relative;
+
+    padding: 12px 0;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: color 0.15s ease;
+}
+
+.photo-library-tab:hover {
+    color: #e2e8f0;
+}
+
+.photo-library-tab.active {
+    color: #f8fafc;
+
+    font-weight: 600;
+}
+
+.photo-library-tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: -1px;
+
+    height: 2px;
+
+    background: #8b5cf6;
+
+    border-radius: 99px;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY GRID
+   ============================================================ */
+
+.photo-library-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+
+    padding: 12px;
+
+    max-height: 430px;
+
+    overflow-y: auto;
+
+    overscroll-behavior: contain;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY ITEM
+   ============================================================ */
+
+.photo-library-item {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+
+    background: #020617;
+
+    border: 1px solid #1e293b;
+
+    cursor: grab;
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+}
+
+.photo-library-item:hover {
+    transform: scale(1.025);
+
+    border-color: #6366f1;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.35);
+}
+
+.photo-library-item:active {
+    cursor: grabbing;
+
+    transform: scale(0.97);
+}
+
+.photo-library-item.dragging {
+    opacity: 0.45;
+
+    transform: scale(0.95);
+}
+
+.photo-library-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY ITEM OVERLAY
+   ============================================================ */
+
+.photo-library-item::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2, 6, 23, 0.45),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.15s ease;
+
+    pointer-events: none;
+}
+
+.photo-library-item:hover::after {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY DELETE
+   ============================================================ */
+
+.photo-library-delete {
+    position: absolute;
+
+    top: 5px;
+    right: 5px;
+
+    width: 23px;
+    height: 23px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(15, 23, 42, 0.85);
+
+    color: #fff;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    z-index: 5;
+
+    transition:
+        opacity 0.15s ease,
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.photo-library-item:hover .photo-library-delete {
+    opacity: 1;
+}
+
+.photo-library-delete:hover {
+    background: #ef4444;
+
+    transform: scale(1.08);
+}
+
+
+/* ============================================================
+   PHOTO NAME
+   ============================================================ */
+
+.photo-library-name {
+    position: absolute;
+
+    left: 6px;
+    right: 6px;
+    bottom: 5px;
+
+    z-index: 4;
+
+    color: white;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    opacity: 0;
+
+    transition: opacity 0.15s ease;
+}
+
+.photo-library-item:hover .photo-library-name {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   EMPTY PHOTO LIBRARY
+   ============================================================ */
+
+.photo-library-empty {
+    grid-column: 1 / -1;
+
+    padding: 35px 15px;
+
+    text-align: center;
+
+    color: #64748b;
+}
+
+.photo-library-empty i {
+    margin: 0 auto 10px;
+
+    display: block;
+}
+
+.photo-library-empty strong {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    margin-bottom: 4px;
+}
+
+.photo-library-empty span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   PROJECT PHOTO DROP AREA
+   ============================================================ */
+
+.project-image-drop {
+    position: relative;
+
+    min-height: 170px;
+
+    border: 2px dashed #334155;
+
+    border-radius: 14px;
+
+    background: #020617;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.project-image-drop:hover {
+    border-color: #475569;
+}
+
+.project-image-drop.drag-over {
+    border-color: #6366f1 !important;
+
+    background:
+        rgba(99, 102, 241, 0.10) !important;
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.08),
+        inset 0 0 30px rgba(99, 102, 241, 0.05);
+
+    transform: scale(1.01);
+}
+
+.project-image-drop.drag-over::after {
+    content: "Drop image here";
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(2, 6, 23, 0.70);
+
+    color: #c7d2fe;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* ============================================================
+   PROJECT IMAGE
+   ============================================================ */
+
+.project-image-drop img {
+    width: 100%;
+
+    height: 170px;
+
+    display: block;
+
+    object-fit: cover;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   PROJECT IMAGE EMPTY STATE
+   ============================================================ */
+
+.project-image-empty {
+    min-height: 170px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #64748b;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+.project-image-empty i {
+    color: #475569;
+
+    margin-bottom: 8px;
+}
+
+.project-image-empty strong {
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+.project-image-empty span {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+
+/* ============================================================
+   PROJECT IMAGE ACTION BAR
+   ============================================================ */
+
+.project-image-actions {
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+
+    opacity: 0;
+
+    transform: translateY(5px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 20;
+}
+
+.project-image-drop:hover .project-image-actions {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.project-image-action {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(15, 23, 42, 0.88);
+
+    backdrop-filter: blur(8px);
+
+    color: #f8fafc;
+
+    border-radius: 7px;
+
+    padding: 6px 9px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.project-image-action:hover {
+    background: #1e293b;
+
+    border-color: #475569;
+}
+
+
+/* ============================================================
+   DROP HINT
+   ============================================================ */
+
+.project-drop-hint {
+    position: absolute;
+
+    left: 50%;
+    bottom: 10px;
+
+    transform: translateX(-50%);
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   DRAG GHOST / GLOBAL DRAG STATE
+   ============================================================ */
+
+body.photo-dragging {
+    cursor: grabbing !important;
+}
+
+body.photo-dragging .project-image-drop {
+    border-color: #475569;
+}
+
+body.photo-dragging .project-image-drop::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border: 1px dashed rgba(99, 102, 241, 0.25);
+
+    border-radius: 10px;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+/* ============================================================
+   UPLOAD PROGRESS
+   ============================================================ */
+
+.photo-upload-progress {
+    height: 3px;
+
+    margin: 0 12px 12px;
+
+    border-radius: 99px;
+
+    background: #1e293b;
+
+    overflow: hidden;
+}
+
+.photo-upload-progress-bar {
+    height: 100%;
+
+    width: 0;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8b5cf6,
+            #6366f1
+        );
+
+    transition: width 0.25s ease;
+}
+
+
+/* ============================================================
+   HIDDEN FILE INPUT
+   ============================================================ */
+
+#photo-library-input,
+#input-avatar-file,
+#input-import-json {
+    display: none;
+}
+
+
+/* ============================================================
+   SIDEBAR PHOTO AREA
+   ============================================================ */
+
+.photo-library-wrapper {
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   PHOTO LIBRARY SCROLL
+   ============================================================ */
+
+.photo-library-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.photo-library-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.photo-library-grid::-webkit-scrollbar-thumb {
+    background: #334155;
+
+    border-radius: 999px;
+}
+
+.photo-library-grid::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+
+/* ============================================================
+   DRAGGING PLACEHOLDER
+   ============================================================ */
+
+.photo-library-drag-placeholder {
+    aspect-ratio: 1 / 1;
+
+    border-radius: 9px;
+
+    border: 2px dashed #6366f1;
+
+    background:
+        rgba(99, 102, 241, 0.08);
+}
+
+
+/* ============================================================
+   BUTTON TRANSITIONS
+   ============================================================ */
+
+button,
+label {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+    .photo-library-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 6px;
+
+        padding: 10px;
+    }
+
+    .photo-upload-zone {
+        margin: 10px;
+
+        padding: 18px 10px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .photo-library-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        max-height: 360px;
+    }
+
+    .viewport-tablet {
+        width: 768px;
+
+        max-width: 92vw;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .photo-library-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        max-height: 320px;
+    }
+
+    .viewport-mobile {
+        width: 390px;
+
+        max-width: 90vw;
+    }
+
+    #toast-container {
+        left: 12px;
+        right: 12px;
+
+        bottom: 12px;
+    }
+
+    .toast {
+        min-width: 0;
+
+        width: 100%;
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+.photo-upload-zone:focus-within {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.photo-library-item:focus-within {
+    border-color: #6366f1;
+
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+    }
+}

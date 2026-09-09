@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Studio — Interactive Portfolio Builder</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom Studio Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 h-screen flex flex-col antialiased select-none overflow-hidden">
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="h-16 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 flex items-center justify-between z-30 shrink-0">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <span class="font-black text-base tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">Portfolio Studio</span>
+          <div class="flex items-center gap-1.5 text-[11px]">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="save-status" class="text-emerald-400 font-medium">Saved</span>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block h-6 w-[1px] bg-slate-800 mx-2"></div>
+      <!-- Presets Selector -->
+      <div class="hidden md:flex items-center gap-2">
+        <span class="text-xs font-semibold text-slate-400">Preset:</span>
+        <select id="preset-select" class="form-input text-xs py-1.5 w-44 bg-slate-900 border-slate-700">
+          <option value="fullstack">🚀 Full-Stack Engineer</option>
+          <option value="designer">🎨 UI/UX Designer</option>
+          <option value="datascientist">🤖 AI & Data Scientist</option>
+          <option value="blank">📄 Blank Slate</option>
+        </select>
+      </div>
+    </div>
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button id="btn-deploy-guide" class="px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+        <i data-lucide="globe" class="w-4 h-4 text-indigo-400"></i>
+        <span class="hidden sm:inline">Deploy Guide</span>
+      </button>
+      <label for="input-import-json" class="cursor-pointer px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition" title="Import JSON">
+        <i data-lucide="upload" class="w-4 h-4 text-slate-400"></i>
+        <span class="hidden md:inline">Import</span>
+      </label>
+      <input type="file" id="input-import-json" accept=".json" class="hidden">
+      <button id="btn-export-json" class="px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+        <i data-lucide="download" class="w-4 h-4 text-slate-400"></i>
+        <span class="hidden md:inline">Export JSON</span>
+      </button>
+      <button id="btn-copy-html" class="p-2 sm:px-3 sm:py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+        <i data-lucide="copy" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">Copy HTML</span>
+      </button>
+      <button id="btn-print-pdf" class="p-2 sm:px-3 sm:py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">PDF</span>
+      </button>
+      <!-- Primary Action: Download HTML -->
+      <button id="btn-download-html" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition transform hover:scale-[1.02] active:scale-[0.98]">
+        <i data-lucide="file-code" class="w-4 h-4"></i>
+        <span>Download Website</span>
+      </button>
+    </div>
+  </header>
+  <!-- ================= MAIN STUDIO SPLIT LAYOUT ================= -->
+  <div class="flex-1 flex overflow-hidden">
+    <!-- LEFT PANEL: FORM EDITOR (TABS) -->
+    <aside class="w-full md:w-[480px] lg:w-[540px] bg-slate-900/95 border-r border-slate-800 flex flex-col shrink-0 z-20 overflow-hidden">
+      <!-- Tab Navigation -->
+      <div class="flex items-center gap-1 p-2 bg-slate-950 border-b border-slate-800 overflow-x-auto select-none no-scrollbar">
+        <button class="tab-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white flex items-center gap-1.5 shrink-0 transition" data-tab="profile">
+          <i data-lucide="user" class="w-3.5 h-3.5"></i> Profile
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="about">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i> About
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="skills">
+          <i data-lucide="code" class="w-3.5 h-3.5"></i> Skills
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="projects">
+          <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i> Projects
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="experience">
+          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> Work
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="education">
+          <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i> Education
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="custom">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Extra
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 shrink-0 transition flex items-center gap-1.5" data-tab="design">
+          <i data-lucide="palette" class="w-3.5 h-3.5"></i> Theme
+        </button>
+      </div>
+      <!-- Tab Contents -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        <!-- TAB 1: PROFILE -->
+        <div id="tab-profile" class="tab-content space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="form-label">Full Name</label>
+              <input type="text" id="input-name" class="form-input" placeholder="e.g. Alex Morgan">
+            </div>
+            <div>
+              <label class="form-label">Professional Title</label>
+              <input type="text" id="input-title" class="form-input" placeholder="e.g. Full-Stack Engineer">
+            </div>
+          </div>
+          <div>
+            <label class="form-label">Short Bio / Tagline</label>
+            <textarea id="input-bio" rows="3" class="form-input" placeholder="Brief summary about yourself..."></textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="form-label">Email</label>
+              <input type="email" id="input-email" class="form-input" placeholder="alex@example.com">
+            </div>
+            <div>
+              <label class="form-label">Phone</label>
+              <input type="text" id="input-phone" class="form-input" placeholder="+1 (555) 000-0000">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="form-label">Location</label>
+              <input type="text" id="input-location" class="form-input" placeholder="San Francisco, CA">
+            </div>
+            <div>
+              <label class="form-label">CTA Button Text</label>
+              <input type="text" id="input-cta-text" class="form-input" placeholder="Let's Build Something">
+            </div>
+          </div>
+          <!-- Photo Upload -->
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
+            <label class="form-label">Profile Photo / Avatar</label>
+            <div class="flex items-center gap-3">
+              <input type="text" id="input-avatar-url" class="form-input text-xs flex-1" placeholder="Image URL (https://...)">
+              <label for="input-avatar-file" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer shrink-0 transition flex items-center gap-1.5 border border-slate-700">
+                <i data-lucide="upload" class="w-3.5 h-3.5"></i> Upload
+              </label>
+              <input type="file" id="input-avatar-file" accept="image/*" class="hidden">
+            </div>
+          </div>
+          <!-- Available For Hire -->
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-200">Available For Hire Badge</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="input-available" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+              </label>
+            </div>
+            <div>
+              <label class="form-label">Status Text</label>
+              <input type="text" id="input-status-text" class="form-input text-xs" placeholder="Available for opportunities">
+            </div>
+          </div>
+          <!-- Socials -->
+          <div class="space-y-3 pt-2">
+            <label class="form-label">Social Handles</label>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-400"><i data-lucide="github" class="w-4 h-4"></i></div>
+                <input type="text" id="input-social-github" class="form-input text-xs" placeholder="https://github.com/username">
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-400"><i data-lucide="linkedin" class="w-4 h-4"></i></div>
+                <input type="text" id="input-social-linkedin" class="form-input text-xs" placeholder="https://linkedin.com/in/username">
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-400"><i data-lucide="twitter" class="w-4 h-4"></i></div>
+                <input type="text" id="input-social-twitter" class="form-input text-xs" placeholder="https://twitter.com/username">
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-400"><i data-lucide="globe" class="w-4 h-4"></i></div>
+                <input type="text" id="input-social-website" class="form-input text-xs" placeholder="https://mywebsite.com">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- TAB 2: ABOUT -->
+        <div id="tab-about" class="tab-content hidden space-y-5">
+          <div>
+            <label class="form-label">Section Heading</label>
+            <input type="text" id="input-about-heading" class="form-input" placeholder="About Me">
+          </div>
+          <div>
+            <label class="form-label">Summary / Narrative</label>
+            <textarea id="input-about-summary" rows="5" class="form-input" placeholder="Detailed story..."></textarea>
+          </div>
+          <div>
+            <label class="form-label">Key Highlights (One per line)</label>
+            <textarea id="input-about-highlights" rows="4" class="form-input text-xs font-mono"></textarea>
+          </div>
+        </div>
+        <!-- TAB 3: SKILLS -->
+        <div id="tab-skills" class="tab-content hidden space-y-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Skills & Tech Stack</h3>
+            <button id="btn-add-skill" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Skill
+            </button>
+          </div>
+          <div id="skills-list" class="space-y-2"></div>
+        </div>
+        <!-- TAB 4: PROJECTS -->
+        <div id="tab-projects" class="tab-content hidden space-y-5">
+          <!-- TAB 4: PROJECTS -->
+<div id="tab-projects" class="tab-content hidden space-y-5">
+
+  <!-- ================= PHOTO LIBRARY ================= -->
+  <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
+
+    <div class="flex items-center justify-between">
+      <div>
+        <h3 class="text-sm font-bold text-white">Photo Library</h3>
+        <p class="text-[11px] text-slate-500">
+          Upload photos and drag them into your projects
+        </p>
+      </div>
+
+      <label
+        for="photo-library-input"
+        class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold cursor-pointer flex items-center gap-1.5"
+      >
+        <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+        Upload Photos
+      </label>
+
+      <input
+        type="file"
+        id="photo-library-input"
+        accept="image/*"
+        multiple
+        class="hidden"
+      >
+    </div>
+
+    <!-- PHOTO LIBRARY -->
+    <div
+      id="photo-library"
+      class="grid grid-cols-3 gap-3 min-h-[90px] p-2 rounded-lg bg-slate-900 border border-slate-800"
+    >
+    </div>
+
+  </div>
+
+
+  <!-- ================= PROJECTS ================= -->
+
+  <div class="flex items-center justify-between">
+
+    <h3 class="text-sm font-bold text-white">
+      Featured Projects
+    </h3>
+
+    <button
+      id="btn-add-project"
+      class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition"
+    >
+      <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+      Add Project
+    </button>
+
+  </div>
+
+  <div
+    id="projects-list"
+    class="space-y-4"
+  ></div>
+
+</div>
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Featured Projects</h3>
+            <button id="btn-add-project" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Project
+            </button>
+          </div>
+          <div id="projects-list" class="space-y-4"></div>
+        </div>
+        <!-- TAB 5: WORK EXPERIENCE -->
+        <div id="tab-experience" class="tab-content hidden space-y-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Career Experience</h3>
+            <button id="btn-add-experience" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Role
+            </button>
+          </div>
+          <div id="experience-list" class="space-y-4"></div>
+        </div>
+        <!-- TAB 6: EDUCATION -->
+        <div id="tab-education" class="tab-content hidden space-y-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Education</h3>
+            <button id="btn-add-education" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Education
+            </button>
+          </div>
+          <div id="education-list" class="space-y-4"></div>
+        </div>
+        <!-- TAB 7: CUSTOM SECTIONS -->
+        <div id="tab-custom" class="tab-content hidden space-y-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Extra Sections</h3>
+            <button id="btn-add-custom-section" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Section
+            </button>
+          </div>
+          <div id="custom-sections-list" class="space-y-4"></div>
+        </div>
+        <!-- TAB 8: THEME & DESIGN -->
+        <div id="tab-design" class="tab-content hidden space-y-5">
+          <div class="space-y-2">
+            <label class="form-label">Layout Template</label>
+            <select id="template-select" class="form-input">
+              <option value="modern-tech">⚡ Modern Tech (Neo-Developer)</option>
+              <option value="bento-grid">🍱 Bento Grid (Creative & Modular)</option>
+              <option value="executive">📰 Executive Minimalist (Clean Editorial)</option>
+              <option value="developer-terminal">💻 Developer Terminal (Retro Monospace)</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label class="form-label">Primary Accent Color</label>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
+                <div class="color-swatch bg-indigo-500" data-color="#6366f1" title="Indigo"></div>
+                <div class="color-swatch bg-emerald-500" data-color="#10b981" title="Emerald"></div>
+                <div class="color-swatch bg-pink-500" data-color="#ec4899" title="Pink"></div>
+                <div class="color-swatch bg-cyan-500" data-color="#06b6d4" title="Cyan"></div>
+                <div class="color-swatch bg-amber-500" data-color="#f59e0b" title="Amber"></div>
+                <div class="color-swatch bg-violet-500" data-color="#8b5cf6" title="Violet"></div>
+              </div>
+              <div class="flex items-center gap-2 ml-auto">
+                <span class="text-xs text-slate-400">Custom:</span>
+                <input type="color" id="color-picker" class="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0">
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="form-label">Typography Pairing</label>
+            <select id="font-select" class="form-input">
+              <option value="Plus Jakarta Sans">Plus Jakarta Sans (Modern & Crisp)</option>
+              <option value="Inter">Inter (Clean & Geometric)</option>
+              <option value="Outfit">Outfit (Playful & Tech)</option>
+              <option value="Playfair Display">Playfair Display (Editorial Serif)</option>
+              <option value="Space Grotesk">Space Grotesk (Neo-Brutalist)</option>
+              <option value="JetBrains Mono">JetBrains Mono (Developer Monospace)</option>
+            </select>
+          </div>
+          <div class="space-y-2 pt-2">
+            <label class="form-label">Color Theme Mode</label>
+            <button id="theme-mode-toggle" class="w-full py-2.5 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-2 transition">
+              <i data-lucide="moon" class="w-4 h-4 text-indigo-400"></i> Dark Mode
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- RIGHT PANEL: LIVE VIEWPORT PREVIEW -->
+    <main class="flex-1 bg-slate-950 flex flex-col overflow-hidden relative">
+      <!-- Toolbar -->
+      <div class="h-12 bg-slate-900/60 backdrop-blur-md border-b border-slate-800/80 px-4 sm:px-6 flex items-center justify-between select-none z-10 shrink-0">
+        <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800">
+          <button class="viewport-btn px-2.5 py-1 rounded text-xs font-medium bg-slate-700 text-white flex items-center gap-1.5 transition" data-viewport="desktop">
+            <i data-lucide="monitor" class="w-3.5 h-3.5"></i> Desktop
+          </button>
+          <button class="viewport-btn px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition" data-viewport="tablet">
+            <i data-lucide="tablet" class="w-3.5 h-3.5"></i> Tablet
+          </button>
+          <button class="viewport-btn px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition" data-viewport="mobile">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> Mobile
+          </button>
+        </div>
+        <div class="text-xs font-medium text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="hidden sm:inline">Live Syncing</span>
+        </div>
+        <!-- Zoom -->
+        <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs">
+          <button id="btn-zoom-out" class="p-1 text-slate-400 hover:text-slate-200" title="Zoom Out"><i data-lucide="minus" class="w-3.5 h-3.5"></i></button>
+          <span id="zoom-level-text" class="px-2 font-mono text-[11px] text-slate-300">100%</span>
+          <button id="btn-zoom-in" class="p-1 text-slate-400 hover:text-slate-200" title="Zoom In"><i data-lucide="plus" class="w-3.5 h-3.5"></i></button>
+          <button id="btn-zoom-reset" class="px-1.5 py-0.5 text-[10px] text-slate-400 hover:text-slate-200 ml-1 rounded hover:bg-slate-800">Reset</button>
+        </div>
+      </div>
+      <!-- Live Canvas -->
+      <div id="preview-wrapper" class="flex-1 overflow-auto p-4 flex items-center justify-center bg-[#070a13]">
+        <div id="preview-container" class="preview-container viewport-desktop bg-white overflow-hidden">
+          <iframe id="preview-frame" title="Portfolio Live Preview"></iframe>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- Deploy Guide Modal -->
+  <div id="deploy-modal" class="modal-overlay">
+    <div class="modal-content w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
+            <i data-lucide="rocket" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-white">How to Deploy Your Portfolio</h3>
+            <p class="text-xs text-slate-400">Your downloaded file is ready to host for free!</p>
+          </div>
+        </div>
+        <button id="close-deploy-modal" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="space-y-4 text-xs text-slate-300">
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div class="font-bold text-white text-sm">1. Netlify Drop (Fastest &mdash; 10 seconds)</div>
+          <p class="text-slate-400">Rename your downloaded file to <code>index.html</code>, go to <a href="https://app.netlify.com/drop" target="_blank" class="text-cyan-400 underline">app.netlify.com/drop</a> and drag & drop it!</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div class="font-bold text-white text-sm">2. GitHub Pages</div>
+          <p class="text-slate-400">Upload <code>index.html</code> to a repo named <code>username.github.io</code> and enable Pages in settings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+  <!-- JavaScript Modules -->
+  <script src="sample-data.js"></script>
+  <script src="templates.js"></script>
+  <script src="exporter.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>
